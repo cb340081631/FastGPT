@@ -8,16 +8,16 @@ import { mongoSessionRun } from '@fastgpt/service/common/mongo/sessionRun';
 import { NextAPI } from '@/service/middleware/entry';
 import { ApiRequestProps } from '@fastgpt/service/type/next';
 import { deleteChatFiles } from '@fastgpt/service/core/chat/controller';
-
+/// api
 /* clear chat history */
-async function handler(req: ApiRequestProps<{}, DelHistoryProps>, res: NextApiResponse) {
-  const { appId, chatId } = req.query;
+async function handler(req: ApiRequestProps<DelHistoryProps, {}>, res: NextApiResponse) {
+  const { appId, chatId } = req.body;
 
   await authChatCrud({
     req,
     authToken: true,
     authApiKey: true,
-    ...req.query
+    ...req.body
   });
 
   await deleteChatFiles({ chatIdList: [chatId] });

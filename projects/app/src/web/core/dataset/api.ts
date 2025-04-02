@@ -1,4 +1,4 @@
-import { GET, POST, PUT, DELETE } from '@/web/common/api/request';
+import { GET, POST } from '@/web/common/api/request';
 import type {
   GetPathProps,
   ParentIdType,
@@ -63,7 +63,7 @@ import type {
 import type { GetQuoteDataResponse } from '@/pages/api/core/dataset/data/getQuoteData';
 import type { GetQuotePermissionResponse } from '@/pages/api/core/dataset/data/getPermission';
 import type { GetQueueLenResponse } from '@/pages/api/core/dataset/training/getQueueLen';
-
+/// api
 /* ======================== dataset ======================= */
 export const getDatasets = (data: GetDatasetListBody) =>
   POST<DatasetListItemType[]>(`/core/dataset/list`, data);
@@ -84,9 +84,9 @@ export const getDatasetById = (id: string) => GET<DatasetItemType>(`/core/datase
 export const postCreateDataset = (data: CreateDatasetParams) =>
   POST<string>(`/core/dataset/create`, data);
 
-export const putDatasetById = (data: DatasetUpdateBody) => PUT<void>(`/core/dataset/update`, data);
+export const putDatasetById = (data: DatasetUpdateBody) => POST(`/core/dataset/update`, data);
 
-export const delDatasetById = (id: string) => DELETE(`/core/dataset/delete?id=${id}`);
+export const delDatasetById = (id: string) => POST(`/core/dataset/delete`, { id });
 
 export const postWebsiteSync = (data: PostWebsiteSyncParams) =>
   POST(`/proApi/core/dataset/websiteSync`, data, {
@@ -147,7 +147,7 @@ export const postCreateDatasetApiDatasetCollection = (
 export const putDatasetCollectionById = (data: UpdateDatasetCollectionParams) =>
   POST(`/core/dataset/collection/update`, data);
 export const delDatasetCollectionById = (params: { id: string }) =>
-  DELETE(`/core/dataset/collection/delete`, params);
+  POST(`/core/dataset/collection/delete`, params);
 export const postLinkCollectionSync = (collectionId: string) =>
   POST<DatasetCollectionSyncResultEnum>(`/core/dataset/collection/sync`, {
     collectionId
@@ -160,7 +160,7 @@ export const postCreateDatasetCollectionTag = (data: CreateDatasetCollectionTagP
 export const postAddTagsToCollections = (data: AddTagsToCollectionsParams) =>
   POST(`/proApi/core/dataset/tag/addToCollections`, data);
 export const delDatasetCollectionTag = (data: { id: string; datasetId: string }) =>
-  DELETE(`/proApi/core/dataset/tag/delete`, data);
+  POST(`/proApi/core/dataset/tag/delete`, data);
 export const updateDatasetCollectionTag = (data: UpdateDatasetCollectionTagParams) =>
   POST(`/proApi/core/dataset/tag/update`, data);
 export const getDatasetCollectionTags = (
@@ -195,12 +195,11 @@ export const postInsertData2Dataset = (data: InsertOneDatasetDataProps) =>
  * update one datasetData by id
  */
 export const putDatasetDataById = (data: UpdateDatasetDataProps) =>
-  PUT('/core/dataset/data/update', data);
+  POST('/core/dataset/data/update', data);
 /**
  * 删除一条知识库数据
  */
-export const delOneDatasetDataById = (id: string) =>
-  DELETE<string>(`/core/dataset/data/delete`, { id });
+export const delOneDatasetDataById = (id: string) => POST(`/core/dataset/data/delete`, { id });
 
 // Get quote data
 export const getQuoteData = (id: string) =>

@@ -6,9 +6,9 @@ import { mongoSessionRun } from '@fastgpt/service/common/mongo/sessionRun';
 import { NextAPI } from '@/service/middleware/entry';
 import { WritePermissionVal } from '@fastgpt/global/support/permission/constant';
 import { CommonErrEnum } from '@fastgpt/global/common/error/code/common';
-
+/// api
 async function handler(req: NextApiRequest) {
-  const { id: collectionId } = req.query as { id: string };
+  const { id: collectionId } = req.body as { id: string };
 
   if (!collectionId) {
     return Promise.reject(CommonErrEnum.missingParams);

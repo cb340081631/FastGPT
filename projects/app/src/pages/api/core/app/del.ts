@@ -19,9 +19,9 @@ import { deleteChatFiles } from '@fastgpt/service/core/chat/controller';
 import { pushTrack } from '@fastgpt/service/common/middle/tracks/utils';
 import { MongoOpenApi } from '@fastgpt/service/support/openapi/schema';
 import { removeImageByPath } from '@fastgpt/service/common/file/image/controller';
-
+/// api
 async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
-  const { appId } = req.query as { appId: string };
+  const { appId } = req.body as { appId: string };
 
   if (!appId) {
     throw new Error('参数错误');

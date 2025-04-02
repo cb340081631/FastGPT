@@ -5,12 +5,10 @@ import { authSystemAdmin } from '@fastgpt/service/support/permission/user/auth';
 import { findModelFromAlldata } from '@fastgpt/service/core/ai/model';
 import { updateFastGPTConfigBuffer } from '@fastgpt/service/common/system/config/controller';
 import { loadSystemModels, updatedReloadSystemModel } from '@fastgpt/service/core/ai/config/utils';
+/// api
+export type deleteQuery = {};
 
-export type deleteQuery = {
-  model: string;
-};
-
-export type deleteBody = {};
+export type deleteBody = { model: string };
 
 export type deleteResponse = {};
 
@@ -20,7 +18,7 @@ async function handler(
 ): Promise<deleteResponse> {
   await authSystemAdmin({ req });
 
-  const { model } = req.query;
+  const { model } = req.body;
 
   const modelData = findModelFromAlldata(model);
 

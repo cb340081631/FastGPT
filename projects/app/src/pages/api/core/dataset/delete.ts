@@ -9,9 +9,9 @@ import { OwnerPermissionVal } from '@fastgpt/global/support/permission/constant'
 import { CommonErrEnum } from '@fastgpt/global/common/error/code/common';
 import { MongoDatasetCollectionTags } from '@fastgpt/service/core/dataset/tag/schema';
 import { removeImageByPath } from '@fastgpt/service/common/file/image/controller';
-
+/// api
 async function handler(req: NextApiRequest) {
-  const { id: datasetId } = req.query as {
+  const { id: datasetId } = req.body as {
     id: string;
   };
 

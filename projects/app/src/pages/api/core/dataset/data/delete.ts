@@ -4,9 +4,9 @@ import { deleteDatasetData } from '@/service/core/dataset/data/controller';
 import { NextAPI } from '@/service/middleware/entry';
 import { WritePermissionVal } from '@fastgpt/global/support/permission/constant';
 import { CommonErrEnum } from '@fastgpt/global/common/error/code/common';
-
+/// api
 async function handler(req: NextApiRequest) {
-  const { id: dataId } = req.query as {
+  const { id: dataId } = req.body as {
     id: string;
   };
 

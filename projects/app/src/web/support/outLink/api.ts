@@ -1,10 +1,10 @@
-import { GET, POST, DELETE } from '@/web/common/api/request';
+import { GET, POST } from '@/web/common/api/request';
 import type {
   OutlinkAppType,
   OutLinkEditType,
   OutLinkSchema
 } from '@fastgpt/global/support/outLink/type.d';
-
+/// api
 // create a shareChat
 export function createShareChat<T>(
   data: OutLinkEditType<T> & {
@@ -28,7 +28,10 @@ export function getShareChatList<T extends OutlinkAppType>(data: {
 
 // delete a  shareChat
 export function delShareChatById(id: string) {
-  return DELETE(`/support/outLink/delete?id=${id}`);
+  return POST(`/support/outLink/delete`, { id });
+}
+export function delShareChatByShareId(shareId: string) {
+  return POST(`/support/outLink/delete`, { shareId });
 }
 
 // update a shareChat

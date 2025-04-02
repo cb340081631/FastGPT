@@ -1,4 +1,4 @@
-import { GET, POST, DELETE, PUT } from '@/web/common/api/request';
+import { GET, POST } from '@/web/common/api/request';
 import type { AppDetailType, AppListItemType } from '@fastgpt/global/core/app/type.d';
 import type { GetAppChatLogsParams } from '@/global/core/api/appReq.d';
 import type { AppUpdateParams, AppChangeOwnerBody } from '@/global/core/app/api';
@@ -6,7 +6,7 @@ import type { CreateAppBody } from '@/pages/api/core/app/create';
 import type { ListAppBody } from '@/pages/api/core/app/list';
 import type { AppLogsListItemType } from '@/types/app';
 import type { PaginationResponse } from '@fastgpt/web/common/fetch/type';
-
+/// api
 /**
  * 获取应用列表
  */
@@ -24,7 +24,7 @@ export const getMyAppsByTags = (data: {}) => POST(`/proApi/core/chat/team/getApp
 /**
  * 根据 ID 删除应用
  */
-export const delAppById = (id: string) => DELETE(`/core/app/del?appId=${id}`);
+export const delAppById = (id: string) => POST(`/core/app/del`, { appId: id });
 
 /**
  * 根据 ID 获取应用
@@ -35,7 +35,7 @@ export const getAppDetailById = (id: string) => GET<AppDetailType>(`/core/app/de
  * 根据 ID 更新应用
  */
 export const putAppById = (id: string, data: AppUpdateParams) =>
-  PUT(`/core/app/update?appId=${id}`, data);
+  POST(`/core/app/update`, { ...data, appId: id });
 
 // =================== chat logs
 export const getAppChatLogs = (data: GetAppChatLogsParams) =>

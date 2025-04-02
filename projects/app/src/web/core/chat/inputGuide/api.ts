@@ -1,4 +1,4 @@
-import { GET, POST, DELETE, PUT } from '@/web/common/api/request';
+import { GET, POST } from '@/web/common/api/request';
 import type {
   ChatInputGuideProps,
   ChatInputGuideResponse
@@ -18,7 +18,7 @@ import type {
   QueryChatInputGuideResponse
 } from '@/pages/api/core/chat/inputGuide/query';
 import type { deleteAllInputGuideBody } from '@/pages/api/core/chat/inputGuide/deleteAll';
-
+/// api
 export const getCountChatInputGuideTotal = (data: countChatInputGuideTotalQuery) =>
   GET<countChatInputGuideTotalResponse>(`/core/chat/inputGuide/countTotal`, data);
 /**
@@ -39,7 +39,7 @@ export const queryChatInputGuideList = (data: QueryChatInputGuideBody, url?: str
 export const postChatInputGuides = (data: createInputGuideBody) =>
   POST<createInputGuideResponse>(`/core/chat/inputGuide/create`, data);
 export const putChatInputGuide = (data: updateInputGuideBody) =>
-  PUT(`/core/chat/inputGuide/update`, data);
+  POST(`/core/chat/inputGuide/update`, data);
 export const delChatInputGuide = (data: deleteInputGuideBody) =>
   POST(`/core/chat/inputGuide/delete`, data);
 export const delAllChatInputGuide = (data: deleteAllInputGuideBody) =>

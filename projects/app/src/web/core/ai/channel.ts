@@ -7,7 +7,7 @@ import {
   CreateChannelProps
 } from '@/global/aiproxy/type';
 import { ChannelStatusEnum } from '@/global/aiproxy/constants';
-
+/// api
 interface ResponseDataType {
   success: boolean;
   message: string;
@@ -139,7 +139,8 @@ export const putChannelStatus = (id: number, status: ChannelStatusEnum) =>
     status
   });
 export const putChannel = (data: ChannelInfoType) =>
-  PUT(`/channel/${data.id}`, {
+  POST(`/channel/${data.id}`, {
+    id: data.id,
     type: data.type,
     name: data.name,
     base_url: data.base_url,
@@ -150,7 +151,7 @@ export const putChannel = (data: ChannelInfoType) =>
     priority: data.priority ? Math.max(data.priority, 1) : undefined
   });
 
-export const deleteChannel = (id: number) => DELETE(`/channel/${id}`);
+export const deleteChannel = (id: number) => POST(`/channel/${id}`, { id });
 
 export const getChannelLog = (params: {
   request_id?: string;

@@ -4,16 +4,16 @@ import { OwnerPermissionVal } from '@fastgpt/global/support/permission/constant'
 import { CommonErrEnum } from '@fastgpt/global/common/error/code/common';
 import type { ApiRequestProps, ApiResponseType } from '@fastgpt/service/type/next';
 import { NextAPI } from '@/service/middleware/entry';
-
-export type OpenAPIDeleteQuery = { id: string };
-export type OpenAPIDeleteBody = {};
+/// api
+export type OpenAPIDeleteQuery = {};
+export type OpenAPIDeleteBody = { id: string };
 export type OpenAPIDeleteResponse = {};
 
 async function handler(
   req: ApiRequestProps<OpenAPIDeleteBody, OpenAPIDeleteQuery>,
   _res: ApiResponseType<any>
 ): Promise<OpenAPIDeleteResponse> {
-  const { id } = req.query as { id: string };
+  const { id } = req.body as { id: string };
 
   if (!id) {
     return Promise.reject(CommonErrEnum.missingParams);

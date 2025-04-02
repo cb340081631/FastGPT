@@ -1,4 +1,4 @@
-import { GET, POST, PUT, DELETE } from '@/web/common/api/request';
+import { GET, POST } from '@/web/common/api/request';
 import type {
   CollaboratorItemType,
   DeletePermissionQuery,
@@ -23,15 +23,15 @@ import type {
   InvitationLinkCreateType,
   InvitationType
 } from '@fastgpt/service/support/user/team/invitationLink/type';
-
+/// api
 /* --------------- team  ---------------- */
 export const getTeamList = (status: `${TeamMemberSchema['status']}`) =>
   GET<TeamTmbItemType[]>(`/proApi/support/user/team/list`, { status });
 export const postCreateTeam = (data: CreateTeamProps) =>
   POST<string>(`/proApi/support/user/team/create`, data);
-export const putUpdateTeam = (data: UpdateTeamProps) => PUT(`/support/user/team/update`, data);
+export const putUpdateTeam = (data: UpdateTeamProps) => POST(`/support/user/team/update`, data);
 export const putSwitchTeam = (teamId: string) =>
-  PUT<string>(`/proApi/support/user/team/switch`, { teamId });
+  POST<string>(`/proApi/support/user/team/switch`, { teamId });
 
 /* --------------- team member ---------------- */
 export const getTeamMembers = (
@@ -50,17 +50,17 @@ export const getTeamMemberCount = () =>
 // export const postInviteTeamMember = (data: InviteMemberProps) =>
 //   POST<InviteMemberResponse>(`/proApi/support/user/team/member/invite`, data);
 export const putUpdateMemberNameByManager = (tmbId: string, name: string) =>
-  PUT(`/proApi/support/user/team/member/updateNameByManager`, { tmbId, name });
+  POST(`/proApi/support/user/team/member/updateNameByManager`, { tmbId, name });
 
 export const putUpdateMemberName = (name: string) =>
-  PUT(`/proApi/support/user/team/member/updateName`, { name });
+  POST(`/proApi/support/user/team/member/updateName`, { name });
 export const delRemoveMember = (tmbId: string) =>
-  DELETE(`/proApi/support/user/team/member/delete`, { tmbId });
+  POST(`/proApi/support/user/team/member/delete`, { tmbId });
 export const updateInviteResult = (data: UpdateInviteProps) =>
-  PUT('/proApi/support/user/team/member/updateInvite', data);
+  POST('/proApi/support/user/team/member/updateInvite', data);
 export const postRestoreMember = (tmbId: string) =>
   POST('/proApi/support/user/team/member/restore', { tmbId });
-export const delLeaveTeam = () => DELETE('/proApi/support/user/team/member/leave');
+export const delLeaveTeam = () => POST('/proApi/support/user/team/member/leave');
 
 /* -------------- team invitaionlink -------------------- */
 
@@ -76,15 +76,15 @@ export const postAcceptInvitationLink = (linkId: string) =>
 export const getInvitationInfo = (linkId: string) =>
   GET<InvitationInfoType>(`/proApi/support/user/team/invitationLink/info`, { linkId });
 export const putForbidInvitationLink = (linkId: string) =>
-  PUT<string>(`/proApi/support/user/team/invitationLink/forbid`, { linkId });
+  POST<string>(`/proApi/support/user/team/invitationLink/forbid`, { linkId });
 
 /* -------------- team collaborator -------------------- */
 export const getTeamClbs = () =>
   GET<CollaboratorItemType[]>(`/proApi/support/user/team/collaborator/list`);
 export const updateMemberPermission = (data: UpdateClbPermissionProps) =>
-  PUT('/proApi/support/user/team/collaborator/update', data);
+  POST('/proApi/support/user/team/collaborator/update', data);
 export const deleteMemberPermission = (id: DeletePermissionQuery) =>
-  DELETE('/proApi/support/user/team/collaborator/delete', id);
+  POST('/proApi/support/user/team/collaborator/delete', id);
 
 /* --------------- team tags ---------------- */
 export const getTeamsTags = () => GET<TeamTagSchema[]>(`/proApi/support/user/team/tag/list`);

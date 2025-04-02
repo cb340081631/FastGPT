@@ -8,10 +8,10 @@ import { deleteChatFiles } from '@fastgpt/service/core/chat/controller';
 import { mongoSessionRun } from '@fastgpt/service/common/mongo/sessionRun';
 import { ApiRequestProps } from '@fastgpt/service/type/next';
 import { authChatCrud } from '@/service/support/permission/auth/chat';
-
+/// api
 /* clear chat history */
-async function handler(req: ApiRequestProps<{}, ClearHistoriesProps>, res: NextApiResponse) {
-  const { appId, shareId, outLinkUid, teamId, teamToken } = req.query;
+async function handler(req: ApiRequestProps<ClearHistoriesProps, {}>, res: NextApiResponse) {
+  const { appId, shareId, outLinkUid, teamId, teamToken } = req.body;
 
   const {
     teamId: chatTeamId,
@@ -22,7 +22,7 @@ async function handler(req: ApiRequestProps<{}, ClearHistoriesProps>, res: NextA
     req,
     authToken: true,
     authApiKey: true,
-    ...req.query
+    ...req.body
   });
 
   const match = await (async () => {

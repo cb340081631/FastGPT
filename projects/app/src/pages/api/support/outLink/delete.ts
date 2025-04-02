@@ -3,20 +3,25 @@ import { authOutLinkCrud } from '@fastgpt/service/support/permission/publish/aut
 import { OwnerPermissionVal } from '@fastgpt/global/support/permission/constant';
 import type { ApiRequestProps } from '@fastgpt/service/type/next';
 import { NextAPI } from '@/service/middleware/entry';
-
-export type OutLinkDeleteQuery = {
-  id: string;
-};
-export type OutLinkDeleteBody = {};
+/// api
+export type OutLinkDeleteQuery = {};
+export type OutLinkDeleteBody = { id: string; shareId: string };
 export type OutLinkDeleteResponse = {};
 
 /* delete a shareChat by shareChatId */
 async function handler(
   req: ApiRequestProps<OutLinkDeleteBody, OutLinkDeleteQuery>
 ): Promise<OutLinkDeleteResponse> {
-  const { id } = req.query;
+  const { id, shareId } = req.body;
+
   await authOutLinkCrud({ req, outLinkId: id, authToken: true, per: OwnerPermissionVal });
-  await MongoOutLink.findByIdAndDelete(id);
+
+  if (id) {
+    await MongoOutLink.findByIdAndDelete(id);
+  } else {
+    await MongoOutLink.deleteOne({ shareId });
+  }
+
   return {};
 }
 

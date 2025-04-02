@@ -1,4 +1,4 @@
-import { DELETE, GET, POST, PUT } from '@/web/common/api/request';
+import { GET, POST } from '@/web/common/api/request';
 import { GetGroupListBody } from '@fastgpt/global/support/permission/memberGroup/api';
 import type {
   GroupMemberItemType,
@@ -19,13 +19,13 @@ export const postCreateGroup = (data: postCreateGroupData) =>
   POST('/proApi/support/user/team/group/create', data);
 
 export const deleteGroup = (groupId: string) =>
-  DELETE('/proApi/support/user/team/group/delete', { groupId });
+  POST('/proApi/support/user/team/group/delete', { groupId });
 
 export const putUpdateGroup = (data: putUpdateGroupData) =>
-  PUT('/proApi/support/user/team/group/update', data);
+  POST('/proApi/support/user/team/group/update', data);
 
 export const getGroupMembers = (groupId: string) =>
   GET<GroupMemberItemType[]>(`/proApi/support/user/team/group/members`, { groupId });
 
 export const putGroupChangeOwner = (groupId: string, tmbId: string) =>
-  PUT(`/proApi/support/user/team/group/changeOwner`, { groupId, tmbId });
+  POST(`/proApi/support/user/team/group/changeOwner`, { groupId, tmbId });

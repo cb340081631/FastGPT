@@ -1,4 +1,4 @@
-import { GET, POST, PUT } from '@/web/common/api/request';
+import { GET, POST } from '@/web/common/api/request';
 import { hashStr } from '@fastgpt/global/common/string/tools';
 import type { ResLogin } from '@/global/support/api/userRes.d';
 import { UserAuthTypeEnum } from '@fastgpt/global/support/user/auth/constants';
@@ -69,10 +69,10 @@ export const updatePasswordByOld = ({ oldPsw, newPsw }: { oldPsw: string; newPsw
   });
 
 export const updateNotificationAccount = (data: { account: string; verifyCode: string }) =>
-  PUT('/proApi/support/user/team/updateNotificationAccount', data);
+  POST('/proApi/support/user/team/updateNotificationAccount', data);
 
 export const updateContact = (data: { contact: string; verifyCode: string }) => {
-  return PUT('/proApi/support/user/account/updateContact', data);
+  return POST('/proApi/support/user/account/updateContact', data);
 };
 
 export const postLogin = ({ password, ...props }: PostLoginProps) =>
@@ -83,7 +83,7 @@ export const postLogin = ({ password, ...props }: PostLoginProps) =>
 
 export const loginOut = () => GET('/support/user/account/loginout');
 
-export const putUserInfo = (data: UserUpdateParams) => PUT('/support/user/account/update', data);
+export const putUserInfo = (data: UserUpdateParams) => POST('/support/user/account/update', data);
 
 export const getWXLoginQR = () =>
   GET<GetWXLoginQRResponse>('/proApi/support/user/account/login/wx/getQR');

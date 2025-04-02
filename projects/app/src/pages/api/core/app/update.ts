@@ -24,10 +24,8 @@ import { TeamWritePermissionVal } from '@fastgpt/global/support/permission/user/
 import { AppErrEnum } from '@fastgpt/global/common/error/code/app';
 import { refreshSourceAvatar } from '@fastgpt/service/common/file/image/controller';
 import { MongoResourcePermission } from '@fastgpt/service/support/permission/schema';
-
-export type AppUpdateQuery = {
-  appId: string;
-};
+/// api
+export type AppUpdateQuery = {};
 
 export type AppUpdateBody = AppUpdateParams;
 
@@ -43,9 +41,8 @@ export type AppUpdateBody = AppUpdateParams;
 //  (2) 目标目录的管理权限
 //  (3) 如果从根目录移动或移动到根目录，需要有团队的应用创建权限
 async function handler(req: ApiRequestProps<AppUpdateBody, AppUpdateQuery>) {
-  const { parentId, name, avatar, type, intro, nodes, edges, chatConfig, teamTags } = req.body;
-
-  const { appId } = req.query;
+  const { appId, parentId, name, avatar, type, intro, nodes, edges, chatConfig, teamTags } =
+    req.body;
 
   if (!appId) {
     Promise.reject(CommonErrEnum.missingParams);

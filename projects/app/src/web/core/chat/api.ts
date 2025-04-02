@@ -1,4 +1,4 @@
-import { GET, POST, DELETE, PUT } from '@/web/common/api/request';
+import { GET, POST } from '@/web/common/api/request';
 import type { ChatHistoryItemType, ChatHistoryItemResType } from '@fastgpt/global/core/chat/type.d';
 import type { getResDataQuery } from '@/pages/api/core/chat/getResData';
 import type {
@@ -30,7 +30,7 @@ import type {
   GetCollectionQuoteProps,
   GetCollectionQuoteRes
 } from '@/pages/api/core/chat/quote/getCollectionQuote';
-
+/// api
 /**
  * 获取初始化聊天内容
  */
@@ -58,23 +58,23 @@ export const getChatRecords = (data: getPaginationRecordsBody) =>
 /**
  * delete one history
  */
-export const delChatHistoryById = (data: DelHistoryProps) => DELETE(`/core/chat/delHistory`, data);
+export const delChatHistoryById = (data: DelHistoryProps) => POST(`/core/chat/delHistory`, data);
 /**
  * clear all history by appid
  */
 export const delClearChatHistories = (data: ClearHistoriesProps) =>
-  DELETE(`/core/chat/clearHistories`, data);
+  POST(`/core/chat/clearHistories`, data);
 
 /**
  * delete one chat record
  */
 export const delChatRecordById = (data: DeleteChatItemProps) =>
-  DELETE(`/core/chat/item/delete`, data);
+  POST(`/core/chat/item/delete`, data);
 
 /**
  * 修改历史记录: 标题/置顶
  */
-export const putChatHistory = (data: UpdateHistoryProps) => PUT('/core/chat/updateHistory', data);
+export const putChatHistory = (data: UpdateHistoryProps) => POST('/core/chat/updateHistory', data);
 
 /* -------------- feedback ------------ */
 export const updateChatUserFeedback = (data: UpdateChatFeedbackProps) =>
